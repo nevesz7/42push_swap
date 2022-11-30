@@ -6,7 +6,7 @@
 /*   By: rarobert <rarobert@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 04:57:50 by rarobert          #+#    #+#             */
-/*   Updated: 2022/11/30 17:00:45 by rarobert         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:06:29 by rarobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void		add_last(t_stack **stack, int value);
 t_stack		*remove_element(t_stack *stack, t_stack *current, int is_first);
 
 //sort
+void		small_sort(t_stack **stack_a, t_stack **stack_b, t_infos *info);
 void		sort_2(t_stack **stack_a, t_stack **stack_b, t_infos *info);
 void		sort_3(t_stack **stack_a, t_stack **stack_b, t_infos *info);
 void		first_iteration(t_stack **a, t_stack **b, t_infos *info);

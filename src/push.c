@@ -6,7 +6,7 @@
 /*   By: rarobert <rarobert@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 04:56:29 by rarobert          #+#    #+#             */
-/*   Updated: 2022/11/30 17:02:17 by rarobert         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:06:13 by rarobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@ int	main(int argc, char *argv[])
 	add_last(&stack_b, -1);
 	inf = check_ordered(stack_a, inf);
 	inf->size_b = 0;
-	if (inf->aft > 0)
-		first_iteration(&stack_a, &stack_b, inf);
-	big_sort(&stack_a, &stack_b, &inf);
-	if (inf->max == 1)
-		sort_2(&stack_a, &stack_b, inf);
-	if (inf->max == 2)
-		sort_3(&stack_a, &stack_b, inf);
+	if (inf->max <= 2)
+		small_sort(&stack_a, &stack_b, inf);
+	else
+	{
+		if (inf->aft > 0)
+			first_iteration(&stack_a, &stack_b, inf);
+		big_sort(&stack_a, &stack_b, &inf);
+	}
 	free_stack(stack_a);
 	free_stack(stack_b);
 	free_list(temp);

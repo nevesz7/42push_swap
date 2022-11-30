@@ -6,11 +6,19 @@
 /*   By: rarobert <rarobert@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:11:23 by rarobert          #+#    #+#             */
-/*   Updated: 2022/11/29 21:01:22 by rarobert         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:07:01 by rarobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push.h"
+
+void	small_sort(t_stack **stack_a, t_stack **stack_b, t_infos *info)
+{
+	if (info->max == 1)
+		sort_2(stack_a, stack_b, info);
+	if (info->max == 2)
+		sort_3(stack_a, stack_b, info);
+}
 
 void	sort_2(t_stack **stack_a, t_stack **stack_b, t_infos *info)
 {

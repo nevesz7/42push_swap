@@ -6,7 +6,7 @@
 /*   By: rarobert <rarobert@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:15:11 by rarobert          #+#    #+#             */
-/*   Updated: 2022/11/30 16:42:52 by rarobert         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:03:09 by rarobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	check_args(int argc, char *argv[])
 	while (argc-- > 1)
 	{
 		if (!(ft_strisdigit(argv[argc])))
-			error_msg("Please insert only valid numbers.");
+			error_msg("Error");
 		check_overflow(argv[argc], (int)ft_strlen(argv[argc]));
 	}
 }
@@ -35,7 +35,7 @@ void	check_list(int i, int value, t_templist **temp)
 	while (aux)
 	{
 		if (value == aux->value)
-			error_msg("Please dont insert repeated numbers.");
+			error_msg("Error");
 		if (value > aux->value)
 			i++;
 		else
@@ -74,7 +74,7 @@ void	check_overflow(char *nb, int size)
 	if (aux <= 0)
 		no++;
 	if (no == 0)
-		error_msg("Please insert only numbers that fit into an int.");
+		error_msg("Error");
 }
 
 t_infos	*check_distances(t_stack *stack, t_infos *inf)
