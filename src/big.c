@@ -6,7 +6,7 @@
 /*   By: rarobert <rarobert@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:32:40 by rarobert          #+#    #+#             */
-/*   Updated: 2022/11/30 17:41:51 by rarobert         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:15:45 by rarobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void	protocol_b1(t_stack **st_a, t_stack **st_b, t_infos **infos)
 				call_function(st_a, st_b, "pa", info);
 				info->size_a++;
 				info->size_b--;
-				b = *st_b;
 			}
 			else
 				call_function(st_a, st_b, "rb", info);
+			b = *st_b;
 		}
 		if (b->next->value == info->ord)
 			call_function(st_a, st_b, "sb", info);

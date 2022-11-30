@@ -6,7 +6,7 @@
 /*   By: rarobert <rarobert@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 12:01:18 by rarobert          #+#    #+#             */
-/*   Updated: 2022/11/25 12:02:30 by rarobert         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:13:32 by rarobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	error_msg(char *str)
 {
-	ft_printf("%s\n", str);
+	write(2, str, ft_strlen(str));
+	write(2, "\n", 1);
 	exit(0);
 }
