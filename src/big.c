@@ -6,7 +6,7 @@
 /*   By: rarobert <rarobert@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 19:32:40 by rarobert          #+#    #+#             */
-/*   Updated: 2022/11/30 18:15:45 by rarobert         ###   ########.fr       */
+/*   Updated: 2022/12/05 13:17:30 by rarobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	protocol_a(t_stack **st_a, t_stack **st_b, t_infos **infos)
 	a = *st_a;
 	if (!(a->value == info->ord))
 	{
-		while (a->next && a->next->value != info->ord)
+		while (a->next->value != info->ord)
 		{
 			call_function(st_a, st_b, "pb", info);
 			info->size_a--;
@@ -44,7 +44,7 @@ void	protocol_b1(t_stack **st_a, t_stack **st_b, t_infos **infos)
 	b = *st_b;
 	if (!(b->value == info->ord))
 	{
-		while (b->next && b->next->value != info->ord)
+		while (b->next->value != info->ord)
 		{
 			if (info->size_b - 1 > info->size_a * 2)
 			{

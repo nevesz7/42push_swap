@@ -6,7 +6,7 @@
 /*   By: rarobert <rarobert@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:15:11 by rarobert          #+#    #+#             */
-/*   Updated: 2022/11/30 18:03:09 by rarobert         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:21:42 by rarobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	check_args(int argc, char *argv[])
 {
+	if (argc == 1)
+		exit(0);
 	while (argc-- > 1)
 	{
 		if (!(ft_strisdigit(argv[argc])))
