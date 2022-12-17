@@ -4,15 +4,15 @@ HEADERS_DIR		= ./inc/
 SOURCES_DIR		= ./src/
 
 HEADERS_LIST	= push.h
-SOURCES_LIST 	= push.c \
-				big.c \
-				swap.c \
+SOURCES_LIST 	= main.c \
 				check.c \
+				utils.c \
+				list.c \
+				stack.c \
 				small.c \
-				errors.c \
-				memory.c \
-				rotate_reverse.c \
-				stack_utils.c
+				big.c \
+				swap_push.c \
+				rotate_reverse.c 
 
 HEADERS			= ${addprefix ${HEADERS_DIR}, ${HEADERS_LIST}}
 SOURCES			= ${addprefix ${SOURCES_DIR}, ${SOURCES_LIST}}
@@ -52,7 +52,6 @@ ${LIBFT}:
 clean:
 			make -sC ${LIBFT_DIR} clean
 			rm -rf ${OBJECTS_DIR}
-			rm -rf ${OBJECTS_DIRB}
 
 fclean:		clean
 			${RM} ${LIBFT}

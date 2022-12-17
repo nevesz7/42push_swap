@@ -6,48 +6,111 @@
 /*   By: rarobert <rarobert@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:11:23 by rarobert          #+#    #+#             */
-/*   Updated: 2022/11/30 18:07:01 by rarobert         ###   ########.fr       */
+/*   Updated: 2022/12/13 04:52:07 by rarobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push.h"
 
-void	small_sort(t_stack **stack_a, t_stack **stack_b, t_infos *info)
+void	small_sort(t_stack **a, t_stack **b, int max)
 {
-	if (info->max == 1)
-		sort_2(stack_a, stack_b, info);
-	if (info->max == 2)
-		sort_3(stack_a, stack_b, info);
+	t_stack	*st;
+
+	st = *a;
+	if (max == 1)
+		sort_2(a, b, *a);
+	if (max == 2)
+		sort_3(a, b, *a);
+	if (max == 3)
+		sort_4(a, b, *a, st->value);
+	if (max == 4)
+		sort_5(a, b, *a);
 }
 
-void	sort_2(t_stack **stack_a, t_stack **stack_b, t_infos *info)
+void	sort_2(t_stack **a, t_stack **b, t_stack *st)
 {
-	t_stack	*stack;
-
-	stack = *stack_a;
-	if (stack->value)
-		call_function(stack_a, stack_b, "sa", info);
+	if (st->value > st->next->value)
+		call_function(a, b, "sa");
 }
 
-void	sort_3(t_stack **stack_a, t_stack **stack_b, t_infos *info)
+void	sort_3(t_stack **a, t_stack **b, t_stack *st)
 {
-	t_stack	*stack;
+	if (stack_is_sorted(st))
+		return ;
+	if (st->value > st->next->value && st->value < st->next->next->value)
+	{
+		call_function(a, b, "sa");
+		return ;
+	}
+	if (st->value < st->next->value && st->value > st->next->next->value)
+	{
+		call_function(a, b, "rra");
+		return ;
+	}
+	if (st->value < st->next->value && st->value < st->next->next->value)
+	{
+		call_function(a, b, "rra");
+		sort_3(a, b, *a);
+		return ;
+	}
+	if (st->value > st->next->value && st->next->value > st->next->next->value)
+	{
+		call_function(a, b, "sa");
+		sort_3(a, b, *a);
+	}
+	else if (st->value > st->next->value && st->value > st->next->next->value)
+		call_function(a, b, "ra");
+}
 
-	stack = *stack_a;
-	if (stack->value == 0 && stack->next->value == 2)
+void	sort_4(t_stack **a, t_stack **b, t_stack *st, int value)
+{
+	if (stack_is_sorted(st))
+		return ;
+	if (value == 0 || value == 3)
 	{
-		call_function(stack_a, stack_b, "sa", info);
-		sort_3(stack_a, stack_b, info);
+		call_function(a, b, "pb");
+		sort_3(a, b, *a);
+		call_function(a, b, "pa");
+		if (value == 3)
+			call_function(a, b, "ra");
 	}
-	if (stack->value == 2 && stack->next->value == 1)
+	else if (value == 1)
 	{
-		call_function(stack_a, stack_b, "ra", info);
-		sort_3(stack_a, stack_b, info);
+		call_function(a, b, "pb");
+		sort_3(a, b, *a);
+		call_function(a, b, "pa");
+		call_function(a, b, "sa");
 	}
-	if (stack->value == 1 && stack->next->value == 2)
-		call_function(stack_a, stack_b, "rra", info);
-	if (stack->value == 2 && stack->next->value == 0)
-		call_function(stack_a, stack_b, "ra", info);
-	if (stack->value == 1 && stack->next->value == 0)
-		call_function(stack_a, stack_b, "sa", info);
+	else if (value == 2)
+	{
+		call_function(a, b, "sa");
+		st = *a;
+		sort_4(a, b, *a, st->value);
+	}
+}
+
+void	sort_5(t_stack **a, t_stack **b, t_stack *st)
+{
+	if (stack_is_sorted(st))
+		return ;
+	if (st->next->next->next->value == 4)
+		call_function(a, b, "rra");
+	st = *a;
+	if (st->next->next->next->next->value == 4)
+		call_function(a, b, "rra");
+	st = *a;
+	if (st->next->next->value == 4)
+		call_function(a, b, "ra");
+	st = *a;
+	if (st->next->value == 4)
+		call_function(a, b, "ra");
+	st = *a;
+	if (st->value == 4)
+	{
+		call_function(a, b, "pb");
+		st = *a;
+		sort_4(a, b, st, st->value);
+		call_function(a, b, "pa");
+		call_function(a, b, "ra");
+	}
 }

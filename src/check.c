@@ -6,7 +6,7 @@
 /*   By: rarobert <rarobert@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:15:11 by rarobert          #+#    #+#             */
-/*   Updated: 2022/11/30 18:21:42 by rarobert         ###   ########.fr       */
+/*   Updated: 2022/12/11 20:57:06 by rarobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_args(int argc, char *argv[])
 	}
 }
 
-void	check_list(int i, int value, t_templist **temp)
+void	check_list(int i, int value, t_templist **temp, t_infos **infos)
 {
 	t_templist	*aux;
 
@@ -37,15 +37,18 @@ void	check_list(int i, int value, t_templist **temp)
 	while (aux)
 	{
 		if (value == aux->value)
+		{
+			free(*infos);
+			free_list(*temp);
 			error_msg("Error");
+		}
 		if (value > aux->value)
 			i++;
 		else
 			aux->position++;
-		if (aux->next)
-			aux = aux->next;
-		else
+		if (!aux->next)
 			break ;
+		aux = aux->next;
 	}
 	aux->next = add_to_list(i, value);
 }
@@ -79,45 +82,13 @@ void	check_overflow(char *nb, int size)
 		error_msg("Error");
 }
 
-t_infos	*check_distances(t_stack *stack, t_infos *inf)
+int	stack_is_sorted(t_stack *stack)
 {
-	inf->bef = 0;
-	inf->aft = 0;
-	while (stack->value != inf->ord)
-	{
-		stack = stack->next;
-		inf->bef++;
-	}
-	while (stack->next && stack->next->value != 0)
-	{
-		stack = stack->next;
-		inf->aft++;
-	}
-	return (inf);
-}
-
-t_infos	*check_ordered(t_stack *stack, t_infos *inf)
-{
-	inf->bef = 0;
-	inf->aft = 0;
-	inf->ord = 0;
-	while (stack->value != inf->ord)
-	{
-		stack = stack->next;
-		inf->bef++;
-	}
 	while (stack->next)
 	{
-		if (stack->next->value == (stack->value + 1))
-			inf->ord++;
-		else
-			break ;
+		if (stack->value > stack->next->value)
+			return (FALSE);
 		stack = stack->next;
 	}
-	while (stack->next)
-	{
-		stack = stack->next;
-		inf->aft++;
-	}
-	return (inf);
+	return (TRUE);
 }
